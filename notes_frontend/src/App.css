@@ -1,104 +1,82 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #1976d2;
+  --secondary: #424242;
+  --accent: #ffc107;
+  --bg: #f8f9fa;
+  --white: #fff;
+  --text: #282c34;
+  --border: #e9ecef;
 }
-
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+body, html, #root, .app-root {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+  box-shadow: 0 1px 4px rgba(25, 115, 210, 0.06);
+  border-bottom: 0.5px solid var(--border);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.notes-grid {
+  margin-left: auto;
+  margin-right: auto;
 }
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+.note-card {
+  transition: box-shadow 0.15s, transform 0.14s;
 }
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.note-card:focus, .note-card:hover {
+  box-shadow: 0 6px 18px 0px rgba(25, 118, 210, 0.12), 0 0.5px 1px 0 #E9ECEF;
+  outline: none;
+  transform: translateY(-2.5px) scale(1.017);
+  border: 1.8px solid var(--primary);
 }
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.floating-btn {
+  box-shadow: 0 2px 16px #FF98004a, 0 1.5px 4px #d3d3d3;
 }
-
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.floating-btn:active, .floating-btn:focus {
+  background: var(--primary);
+  color: var(--accent);
+  outline: none;
+  transition: background 0.23s, color 0.16s;
 }
-
-.theme-toggle:active {
-  transform: translateY(0);
+input[type="text"], input[type="search"], textarea {
+  font-family: inherit;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+textarea:focus, input:focus {
+  border-color: var(--primary);
+  outline: 1.5px solid var(--accent);
 }
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+.delete-btn:focus, .delete-btn:hover {
+  color: #f44336;
+  background: #ffc10722;
+  outline: none;
+}
+.modal-overlay {
+  animation: fadeIn 0.18s linear;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.modal-content, .delete-confirm > div {
+  animation: modalPop 0.23s;
+}
+@keyframes modalPop {
+  0%    { transform: scale(0.94); opacity: 0.7; }
+  70%   { transform: scale(1.04); }
+  100%  { transform: scale(1); opacity: 1; }
+}
+@media (max-width: 680px) {
+  .notes-grid { gap: 12px !important; }
+  .note-card { min-width: 97vw !important; }
+  .modal-content { width: 98vw !important; }
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 2px;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  background: #e7e7ef22;
 }
